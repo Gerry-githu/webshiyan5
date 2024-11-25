@@ -1,5 +1,5 @@
 // 创建一个包含完整时间信息的 data 对象
-const data = {
+var data = {
   year: 0,
   month: 0,
   day: 0,
@@ -10,7 +10,7 @@ const data = {
   milliseconds: 0,
   timeZoneOffset: '',  // 新增字段，保存时区偏移信息
   updateTime: function() {
-    const now = new Date(); // 获取当前时间
+    var now = new Date(); // 获取当前时间
     this.year = now.getFullYear();
     this.month = now.getMonth() + 1; // 月份从 0 开始，需要加 1
     this.day = now.getDate();
@@ -21,22 +21,21 @@ const data = {
     this.milliseconds = now.getMilliseconds(); // 获取毫秒
 
     // 获取时区偏移量（单位为分钟），并将其转换为类似 "UTC+8" 的格式
-    const offset = now.getTimezoneOffset();  // 获取时区偏移（相对于 UTC，单位为分钟）
-    const sign = offset > 0 ? "-" : "+";  // 根据偏移量判断时区符号
-    const hours = Math.floor(Math.abs(offset) / 60);  // 获取时区的小时部分
-    const minutes = Math.abs(offset) % 60;  // 获取时区的分钟部分
+    var offset = now.getTimezoneOffset();  // 获取时区偏移（相对于 UTC，单位为分钟）
+    var sign = offset > 0 ? "-" : "+";  // 根据偏移量判断时区符号
+    var hours = Math.floor(Math.abs(offset) / 60);  // 获取时区的小时部分
+    var minutes = Math.abs(offset) % 60;  // 获取时区的分钟部分
 
     this.timeZoneOffset = `UTC${sign}${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`;
   },
   formatTime: function() {
-    // 格式化时间为完整的时间字符串，精确到毫秒并包含时区
+    // 格式化时间为完整的时间字符串，精确到秒
     let timeString = `${this.year}年${this.month < 10 ? '0' + this.month : this.month}月${this.day < 10 ? '0' + this.day : this.day}日 ` +
            `${this.weekday} ` +
-           `${this.hours < 10 ? '0' + this.hours : this.hours}:${this.minutes < 10 ? '0' + this.minutes : this.minutes}:${this.seconds < 10 ? '0' + this.seconds : this.seconds}.${this.milliseconds < 100 ? '0' + (this.milliseconds < 10 ? '0' + this.milliseconds : this.milliseconds) : this.milliseconds} ` +
-           `时区: ${this.timeZoneOffset}`;
+           `${this.hours < 10 ? '0' + this.hours : this.hours}:${this.minutes < 10 ? '0' + this.minutes : this.minutes}:${this.seconds < 10 ? '0' + this.seconds : this.seconds}`;
 
-    
-    if (this.seconds === 50||this.seconds === 20) {
+    // 只有在分钟为20或50时才添加提示词
+    if (this.minutes === 20 || this.minutes === 50) {
       timeString += "\n站起来活动一下吧！";
     }
 
