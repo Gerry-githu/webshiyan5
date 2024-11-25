@@ -1,5 +1,5 @@
 // 创建一个包含屏幕信息的 data 对象
-const screenData = {
+var screenData = {
   screenWidth: 0,
   screenHeight: 0,
   colorDepth: 0,

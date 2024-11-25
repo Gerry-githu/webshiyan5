@@ -1,5 +1,5 @@
 // 创建一个包含鼠标按下坐标的 data 对象
-const mouseData = {
+var mouseData = {
   mouseX: 0,
   mouseY: 0,
   updateMousePosition: function(event) {
